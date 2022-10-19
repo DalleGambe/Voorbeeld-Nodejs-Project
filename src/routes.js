@@ -71,10 +71,10 @@ router.delete(`/campus/:id`, async (req,res) => {
 });
 
 //docent gedeelte
-router.get(`/docent`, async (req,res) => {
+router.get(`/docent`, async (req, res) => {
     console.log('/docent route called.')
     try {
-        res.json(await Docent.find().populate('campusses'));
+        res.json(await Docent.find().populate('campussen').sort('voornaam'));
     }
     catch(e) {
         console.log(e);
