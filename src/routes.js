@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Campus = require('./models/campus');
+const Docent = require('./models/docent');
 
 //paths / urls
 router.get(`/`, (req,res) => {
@@ -62,6 +63,18 @@ router.delete(`/campus/:id`, async (req,res) => {
     console.log('/campus/:id route called.')
     try {
         res.send(await Campus.findByIdAndDelete(req.params.id));
+    }
+    catch(e) {
+        console.log(e);
+        res.sendStatus(500);
+    }
+});
+
+//docent gedeelte
+router.get(`/docent`, async (req,res) => {
+    console.log('/docent route called.')
+    try {
+        res.json(await Docent.find().populate('campusses'));
     }
     catch(e) {
         console.log(e);
